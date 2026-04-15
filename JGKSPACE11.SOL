@@ -1,0 +1,95 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+/**
+ * @title JGKSPACE11_v2
+  * @dev Integrated Code Blue Ethics & Warp Teleportation Logic
+   * Principal Investigator: Joshua Gabriel Kensil (Life Path 11)
+    */
+    contract JGKSPACE11v2 is ERC20, Ownable {
+            // CODE BLUE MANIFESTO (Embedded for Structural Invariance)
+                string public constant CODE_BLUE = "Integrity, Discovery, Structural Invariance, and Sovereign Logic.";
+                    
+                        uint256 public constant RESONANT_SUPPLY = 4211000000 * 10**18;
+                            uint256 public constant GOLDEN_RATIO_BPS = 162; // 1.62%
+                                address public discoveryWallet;
+
+                                    struct DiscoveryStake {
+                                                uint256 amount;
+                                                        uint256 startTime;
+                                                                uint256 multiplier; // Triple-layered efficiency
+                                    }
+                                        mapping(address => DiscoveryStake) public stakes;
+
+                                            event WarpTeleport(address indexed scout, uint256 amount, bytes32 destinationHash);
+
+                                                constructor(address _discoveryWallet) ERC20("JGKSPACE11", "JGK11") Ownable(msg.sender) {
+                                                            discoveryWallet = _discoveryWallet;
+                                                                    _mint(msg.sender, RESONANT_SUPPLY);
+                                                }
+
+                                                    // --- TRIPLE-STRENGTH EFFICIENCY FORMULA ---
+                                                        // Calculates rewards based on (Time * Amount) * 3 to represent the triple-layered boost
+                                                            function calculateResonance(address scout) public view returns (uint256) {
+                                                                        DiscoveryStake memory s = stakes[scout];
+                                                                                if (s.amount == 0) return 0;
+                                                                                        
+                                                                                                uint256 duration = block.timestamp - s.startTime;
+                                                                                                        // The Triple Multiplier: Efficiency layered 3 times
+                                                                                                                return (s.amount * duration * 3) / 1e18; 
+                                                            }
+
+                                                                // --- WARP TELEPORTATION (High-Speed Transfer) ---
+                                                                    // Uses a hash-based destination for "Scout" stealth and speed
+                                                                        function warpTeleport(address to, uint256 amount, bytes32 secretPath) external {
+                                                                                    require(balanceOf(msg.sender) >= amount, "Insufficent fuel for Warp");
+                                                                                            
+                                                                                                    // Symbolic "Warp" logic: Transfers 100% of value with priority event logging
+                                                                                                            _transfer(msg.sender, to, amount);
+                                                                                                                    
+                                                                                                                            emit WarpTeleport(msg.sender, amount, secretPath);
+                                                                        }
+
+                                                                            // --- CODE BLUE GOVERNANCE ---
+                                                                                function syncStake(uint256 amount) external {
+                                                                                            _transfer(msg.sender, address(this), amount);
+                                                                                                    // Initializing with the 3x Efficiency Multiplier
+                                                                                                            stakes[msg.sender] = DiscoveryStake(amount, block.timestamp, 3);
+                                                                                }
+
+                                                                                    function syncUnstake() external {
+                                                                                                DiscoveryStake memory s = stakes[msg.sender];
+                                                                                                        require(s.amount > 0, "No active stake");
+
+                                                                                                                uint256 reward = calculateResonance(msg.sender);
+                                                                                                                        
+                                                                                                                                delete stakes[msg.sender];
+                                                                                                                                        if (reward > 0) { _mint(msg.sender, reward); }
+                                                                                                                                                _transfer(address(this), msg.sender, s.amount);
+                                                                                    }
+                                                                                        
+                                                                                            // --- DISCOVERY TAX OVERRIDE ---
+                                                                                                function _update(address from, address to, uint256 amount) internal override {
+                                                                                                            if (from == owner() || to == owner() || from == address(this)) {
+                                                                                                                            super._update(from, to, amount);
+                                                                                                            } else {
+                                                                                                                            uint256 tax = (amount * GOLDEN_RATIO_BPS) / 10000;
+                                                                                                                                        super._update(from, discoveryWallet, tax);
+                                                                                                                                                    super._update(from, to, amount - tax);
+                                                                                                            }
+                                                                                                }
+    }
+    
+                                                                                                            }
+                                                                                                            }
+                                                                                                }
+                                                                                    }
+                                                                                }
+                                                                        }
+                                                            }
+                                                }
+                                    }
+    }
